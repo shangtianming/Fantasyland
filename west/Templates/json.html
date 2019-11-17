@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>json在线转换</title>
+</head>
+<body>
+
+
+<form action="{%url  'jsonStandard'%}" method="post" name="jsonStandard">
+    {% csrf_token %}
+    <input type="submit" value="转换">
+    <br><br>
+    <textarea id="json-src" name="jsonname" style="width:100%;height:520px;">{{ jsonname}}</textarea>
+</form>
+
+
+</body>
+</html>

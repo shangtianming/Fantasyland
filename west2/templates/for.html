@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的第二个网页</title>
+</head>
+
+<body>
+{% extends "inherit.html" %}
+
+{% block mainbody %}
+
+{% for item in staffs %}
+<p>{{ item.id }}, {{item}}</p>
+{% endfor %}
+
+{% endblock %}
+
+</body>
+</html>
