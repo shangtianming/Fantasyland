@@ -35,9 +35,14 @@ def delBook(request,book_id):
 
 import json
 def jsonStandard(request):
+    json_after=''
     if request.method=='POST':
-        json_before=json.loads(request.POST['jsonname'])
-        json_after=json.dumps(json_before,indent=4,ensure_ascii=False)
-        context ={"jsonname":json_after}
+        try:
+            jsonname=request.POST['jsonname']
+            json_before = json.loads(jsonname)
+            json_after = json.dumps(json_before, indent=4, ensure_ascii=False)
+        except Exception :
+            json_after ="输入信息异常"
+    context ={"jsonname":json_after}
     return render(request,'json.html',context)
 
