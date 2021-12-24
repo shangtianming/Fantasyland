@@ -1,7 +1,7 @@
 from django.shortcuts import render
 # Create your views here.
 from django.shortcuts import HttpResponse
-from west2.models import Character
+from fantasy.models import Character
 
 def add(request):
      a = request.GET['a']

@@ -18,8 +18,8 @@ from django.urls import path
 
 from mysite.views import first_page
 from west.views import index,addBook,detail,delBook,jsonStandard
-from west2.views import add,add2,index2,operationDB,form,investigate,getname,addname
-
+from fantasy.views import add,add2,index2,operationDB,form,investigate,getname,addname
+from whitewall.views import login
 
 urlpatterns = [
     path('admin/', admin.site.urls),                #http://127.0.0.1:8000/admin/
@@ -41,6 +41,8 @@ urlpatterns = [
     path('delBook/<int:book_id>/', delBook, name='delBook'),
 
     path('json', jsonStandard, name='jsonStandard'),
+
+    path('user/login/', login),
 ]
 
 # from django.urls import reverse
