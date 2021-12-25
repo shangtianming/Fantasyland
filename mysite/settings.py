@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'whitewall',
     'rest_framework',
     'rest_framework.authtoken',
+    'corsheaders',
 
 ]
 
@@ -58,12 +59,18 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    #  这里是注释了，这个是防止跨站请求
-    # 'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
+
+# 允许所有来源访问
+CORS_ORIGIN_ALLOW_ALL = True
+# 允许部分来源访问
+# CORS_ORIGIN_ALLOW_ALL = False
+# CORS_ORIGIN_WHITELIST = ['http://127.0.0.1:8080']
 
 ROOT_URLCONF = 'mysite.urls'
 

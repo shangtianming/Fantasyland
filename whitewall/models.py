@@ -15,7 +15,8 @@ class project(models.Model):
     update_time = models.DateTimeField(auto_now=True)
 
     def to_dict(self):
-        return {'name': self.name,
+        return {'id': self.id,
+                'name': self.name,
                 'desc': self.desc,
                 'leader': self.leader,
                 'tester': self.tester,
@@ -36,10 +37,11 @@ class interfaces(models.Model):
     update_time = models.DateTimeField(auto_now=True)
 
     def to_dict(self):
-        return {'name': self.name,
+        return {'id': self.id,
+                'name': self.name,
                 'desc': self.desc,
-                'leader': self.project,
-                'programmer': self.project_id,
+                'project': self.project,
+                'project_id': self.project_id,
                 'tester': self.tester,
                 'create_time': self.create_time.strftime('%Y-%m-%d %H:%M:%S'),
                 'update_time': self.update_time.strftime('%Y-%m-%d %H:%M:%S')}

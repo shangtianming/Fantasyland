@@ -9,11 +9,10 @@ from rest_framework.permissions import IsAuthenticated
 @api_view(['POST', 'GET'])
 @permission_classes((IsAuthenticated,))
 def project_get_add(request):
-    data = json.loads(request.body)  # 获取请求数据
     if request.method == 'GET':
         # 获取项目数据
-        page_num = data.get('page')
-        size = data.get('size')
+        page_num = request.GET.get('page')
+        size = request.GET.get('size')
         results = project.objects.order_by('id')
         if results.exists():
             paginator = Paginator(results, size)  # 设置每页显示条数
@@ -22,6 +21,7 @@ def project_get_add(request):
         result = {'results': page, 'count': len(results)}
         return HttpResponse(json.dumps(result, ensure_ascii=False))
     if request.method == 'POST':
+        data = json.loads(request.body)  # 获取请求数据
         # 添加项目数据
         try:
             project.objects.create(**data)
@@ -60,11 +60,10 @@ def project_del_update(request, id):
 @api_view(['POST', 'GET'])
 @permission_classes((IsAuthenticated,))
 def interfaces_get_add(request):
-    data = json.loads(request.body)  # 获取请求数据
     if request.method == 'GET':
         # 获取接口数据
-        page_num = data.get('page')
-        size = data.get('size')
+        page_num = request.GET.get('page')
+        size = request.GET.get('size')
         results = interfaces.objects.order_by('id')
         if results.exists():
             paginator = Paginator(results, size)  # 设置每页显示条数
@@ -73,6 +72,7 @@ def interfaces_get_add(request):
         result = {'results': page, 'count': len(results)}
         return HttpResponse(json.dumps(result, ensure_ascii=False))
     if request.method == 'POST':
+        data = json.loads(request.body)  # 获取请求数据
         # 添加接口数据
         try:
             interfaces.objects.create(**data)

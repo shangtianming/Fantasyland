@@ -22,7 +22,18 @@ def login(request):
         Token.objects.filter(user_id=user.id).delete()  # 删除原来的token
         token = Token.objects.create(user=user)  # 创建新的token
         return Response(data={'msg': '登录成功！', 'token': token.key})  # 返回登录信息及token
-    return Response(data={'msg': '用户名或错误！'}, status=status.HTTP_401_UNAUTHORIZED)
+    return Response(data={'msg': '用户名或密码错误！'}, status=status.HTTP_401_UNAUTHORIZED)
+
+
+@api_view(['POST'])
+def token_veri(request):
+    # 获取请求头的token
+    auth = request.META.get("HTTP_AUTHORIZATION").split(' ')[-1]
+    username = json.loads(request.body).get('username')
+    # 根据用户名获取id
+    id = User.objects.filter(username=username).first().id
+    token = Token.objects.filter(user_id=id).first().key
+    return Response(data={'msg': token == auth, 'token': token})
 
 
 class UserView(ComAllAPIView):
