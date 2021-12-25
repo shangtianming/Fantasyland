@@ -4,7 +4,8 @@ from django.shortcuts import render
 from django.shortcuts import HttpResponse
 
 def index(request):
-     return HttpResponse('ok')
+     # return HttpResponse('ok')
+     return render(request, 'west_home.html')
 
 from .models import Book
 from django.http import HttpResponseRedirect

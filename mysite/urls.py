@@ -14,36 +14,39 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
 
-from mysite.views import first_page
-from west.views import index,addBook,detail,delBook,jsonStandard
-from fantasy.views import add,add2,index2,operationDB,form,investigate,getname,addname
-from whitewall.views import login
+from west.views import index, addBook, detail, delBook, jsonStandard
+from fantasy.views import add, add2, index2, operationDB, form, investigate, getname, addname
+from whitewall.views import project_del_update, project_get_add, interfaces_del_update, interfaces_get_add
+
+
 
 urlpatterns = [
-    path('admin/', admin.site.urls),                #http://127.0.0.1:8000/admin/
-    #path('', first_page),
-    path('', index),                                #http://127.0.0.1:8000/
-    path('add',add,name='add'),                     #http://127.0.0.1:8000/add?a=8&b=8
-    path('add/<int:a>/<int:b>/',add2,name='add2'),  #http://127.0.0.1:8000/add/5/8/
-    path('index', index2,name='home'),              #http://127.0.0.1:8000/index
-    path('db', operationDB,name='db'),              #http://127.0.0.1:8000/db
+    # name：定义当前url的别名，允许在template中使用该别名来找到对应的url
+    path('admin/', admin.site.urls),  # django管理员使用的（我自己设置的用户名是我名字拼音，密码是github的用户名）
+    path('user/',  include('user.urls', namespace='user')),
 
-    #视图显示和请求处理
-    path('west/form', form,name='form'),            #http://127.0.0.1:8000/west/form
-    path('west/investigate', investigate,name='investigate'),   # http://127.0.0.1:8000/west/investigate
-    path('west/getname', getname,name='getname'),
-    path('west/addname', addname,name='addname'),
+    path('', index),  # http://127.0.0.1:8000/
 
-    path('detail/', detail, name='detail'),
-    path('addBook/', addBook, name='addBook'),
-    path('delBook/<int:book_id>/', delBook, name='delBook'),
+    # 这三个仅仅是验证路径传参
+    path('fantasy/index', index2, name='home'),  # http://127.0.0.1:8000/index
+    path('fantasy/add', add, name='add'),  # http://127.0.0.1:8000/fantasy/add?a=8&b=8
+    path('fantasy/add/<int:a>/<int:b>/', add2, name='add2'),  # http://127.0.0.1:8000/add/5/8/
+    # 视图显示和请求处理
+    path('fantasy/form', form, name='form'),
+    path('fantasy/investigate', investigate, name='investigate'),
+    path('fantasy/getname', getname, name='getname'),
+    path('fantasy/addname', addname, name='addname'),
+    path('fantasy/db', operationDB, name='db'),
 
-    path('json', jsonStandard, name='jsonStandard'),
+    path('west/detail', detail, name='detail'),
+    path('west/addBook/', addBook, name='addBook'),
+    path('west/delBook/<int:book_id>/', delBook, name='delBook'),
+    path('west/json', jsonStandard, name='jsonStandard'),
 
-    path('user/login/', login),
+    path('white/projects/', project_get_add),  # 获取、添加
+    path('white/projects/<int:id>/', project_del_update),  # 删除、修改
+    path('white/interfaces/', interfaces_get_add),  # 获取、添加
+    path('white/interfaces/<int:id>/', interfaces_del_update),  # 删除、修改
 ]
-
-# from django.urls import reverse
-# reverse('add2', args=(3,4))

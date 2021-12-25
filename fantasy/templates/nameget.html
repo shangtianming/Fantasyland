@@ -5,20 +5,33 @@
     <title>Title</title>
 </head>
 <body>
-
+<h3>
+    本页面会提交到数据库并查询数据，表名  Character
+    <br>
+    fantasy/getname接口获取的nameget.html页面，这个页面会渲染查询到的数据
+    <br>
+    submit按钮再通过form表单触发addname接口，这个接口做了保存数据再重定向回getname
+    <br>
+</h3>
+<!--form表单提交需要添加{% csrf_token %}防止出现403错误-->
 <form action="{% url 'addname' %}" method="post">
     {% csrf_token %}
-  <input type="text" name="staff">
-  <input type="submit" value="Submit">
+    <input type="text" name="staff">
+    <input type="submit" value="Submit">
 </form>
 
 <table>
+    <tr>
+        <td>ID</td>
+        <td>NAME</td>
+    </tr>
     {% for west in name%}
-<tr>
-    <td>{{west.id}}</td>
-    <td>{{west.name}}</td>
-</tr>
-{%endfor%}
+
+    <tr>
+        <td>{{west.id}}</td>
+        <td>{{west.name}}</td>
+    </tr>
+    {%endfor%}
 </table>
 </body>
 </html>
