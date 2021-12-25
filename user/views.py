@@ -3,7 +3,12 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
-from django.contrib.auth.hashers import make_password, check_password
+from django.contrib.auth.hashers import make_password
+import json
+from comFunc.comViews import ComAllAPIView
+from user.serializers import UserSerializer
+from django.contrib.auth.models import User
+from rest_framework.permissions import IsAuthenticated
 
 
 @api_view(['POST'])  # 列表中的元素代表支持哪些请求方法
@@ -20,11 +25,6 @@ def login(request):
     return Response(data={'msg': '用户名或错误！'}, status=status.HTTP_401_UNAUTHORIZED)
 
 
-from comFunc.comViews import ComAllAPIView
-from user.serializers import UserSerializer
-from django.contrib.auth.models import User
-from rest_framework.permissions import IsAuthenticated
-
 class UserView(ComAllAPIView):
     serializer_class = UserSerializer
     permission_classes = (IsAuthenticated,)
@@ -35,6 +35,3 @@ class UserView(ComAllAPIView):
         pwd = request.data.get('password', '123456')
         request.data['password'] = make_password(pwd)  # 调用内置生成密码方法进行加密
         return self.create(request, *args, **kwargs)
-
-
-
