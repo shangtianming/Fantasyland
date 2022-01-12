@@ -106,7 +106,7 @@ DATABASES = {
         'NAME': 'study',
         'USER': 'debian-sys-maint',
         'PASSWORD': 'whitewall',
-        'HOST':'3baP2x7f212G1N04',
+        'HOST':'localhost',
         'PORT':'3306',
     }
 }
