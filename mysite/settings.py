@@ -104,9 +104,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'study',
-        'USER': 'whitewall',
+        'USER': 'debian-sys-maint',
         'PASSWORD': 'whitewall',
-        'HOST':'localhost',
+        'HOST':'3baP2x7f212G1N04',
         'PORT':'3306',
     }
 }
