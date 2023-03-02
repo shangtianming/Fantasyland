@@ -105,7 +105,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'study',
         'USER': 'debian-sys-maint',
-        'PASSWORD': '3baP2x7f212G1N04',
+        'PASSWORD': 'e8p0r3QKkHEAoQW6',
         'HOST':'localhost',
         'PORT':'3306',
     }
